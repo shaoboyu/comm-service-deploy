@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.4.RELEASE'
+        springBootVersion = '1.5.9.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -21,12 +21,8 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    providedRuntime
-}
-
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    compile 'com.alibaba.spring.boot:dubbo-spring-boot-starter:2.0.0'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'com.alibaba.spring.boot:dubbo-spring-boot-starter:1.0.0'
+
 }
