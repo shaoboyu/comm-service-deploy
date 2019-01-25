@@ -1,4 +1,5 @@
 rootProject.name = 'comm-service-deploy'
 include 'dubbo-consumer'
 include 'socket-demo'
+include 'comm-api'
 
