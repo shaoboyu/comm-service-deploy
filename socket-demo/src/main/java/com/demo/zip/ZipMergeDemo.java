@@ -13,9 +13,11 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -67,22 +69,44 @@ public class ZipMergeDemo {
             outPutFolder.createNewFile();
         }
 
+
         //处理A文件
         List<RdIndex> aRdIndices = unZip(aFile, rdId);
 
         //处理B文件
         List<RdIndex> bRdIndices = unZip(bFile, rdId);
 
+        aRdIndices.addAll(bRdIndices);
+        List<RdIndex> collect = aRdIndices.stream().sorted(Comparator.comparing(RdIndex::getTime)).collect(Collectors.toList());
+
+        int i = 1;
+        //recordSN进行重新编号
+        int recordSN = 1;
+        for (RdIndex rdIndex : collect) {
+            rdIndex.setRecordSN(recordSN);
+            recordSN++;
+        }
+
+        int max = 100;
+        //截取,当前为需要上报的
+        List<RdIndex> aColletc = collect.subList(0, max);
+
 
     }
 
-    public static List<RdIndex> unZip(String unZipfilePath , String rdId) throws Exception{
+    /**
+     * 负责解压文件
+     *
+     * @param unZipfilePath
+     * @param rdId
+     * @return
+     * @throws Exception
+     */
+    public static List<RdIndex> unZip(String unZipfilePath, String rdId) throws Exception {
         //
         List<RdIndex> rdIndices = null;
 
         //将重新排序后的文件输出进行压缩并上传至LEMF
-        FileOutputStream fileOutputStream = new FileOutputStream(unZipfilePath);
-        ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
         try {
             //解压缩A
             ZipFile sourceZipFile = new ZipFile(unZipfilePath, "UTF-8");
@@ -112,37 +136,27 @@ public class ZipMergeDemo {
                     rdIndices = JSONObject.parseArray(infoStream.toString("UTF-8"), RdIndex.class);
 
                 }
-                file = new File(basePath + rdId +"/"+entry.getName());
+                file = new File(basePath + rdId + "/" + entry.getName());
 
-                if (entry.isDirectory()) {
-                    file.mkdirs();
-                } else {
-                    //如果指定文件的目录不存在,则创建之.
-                    File parent = file.getParentFile();
-                    if (!parent.exists()) {
-                        parent.mkdirs();
-                    }
-                    inputStream = sourceZipFile.getInputStream((ZipArchiveEntry) entry);
-
-                    byte buf[] = new byte[1024];
-                    int readedBytes = 0;
-                    fileOut = new FileOutputStream(file);
-                    while ((readedBytes = inputStream.read(buf)) > 0) {
-                        fileOut.write(buf, 0, readedBytes);
-                    }
-                    fileOut.flush();
-                    fileOut.close();
+                //如果指定文件的目录不存在,则创建之.
+                File parent = file.getParentFile();
+                if (!parent.exists()) {
+                    parent.mkdirs();
                 }
-                zipOutputStream.flush();
-                fileOutputStream.flush();
+                inputStream = sourceZipFile.getInputStream((ZipArchiveEntry) entry);
+
+                byte buf[] = new byte[1024];
+                int readedBytes = 0;
+                fileOut = new FileOutputStream(file);
+                while ((readedBytes = inputStream.read(buf)) > 0) {
+                    fileOut.write(buf, 0, readedBytes);
+                }
+                fileOut.flush();
+                fileOut.close();
             }
         } catch (Exception e) {
             LOGGER.error("modifyZip Exception", e);
-        } finally {
-            zipOutputStream.close();
-            fileOutputStream.close();
         }
         return rdIndices;
     }
-
 }
