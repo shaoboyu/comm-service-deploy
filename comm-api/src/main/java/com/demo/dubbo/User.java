@@ -1,4 +1,4 @@
-package com.deploy.dubbo.comsumer.domain;
+package com.demo.dubbo;
 
 
 import java.io.Serializable;

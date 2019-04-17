@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':comm-api')
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'com.alibaba.spring.boot:dubbo-spring-boot-starter:1.0.0'
 

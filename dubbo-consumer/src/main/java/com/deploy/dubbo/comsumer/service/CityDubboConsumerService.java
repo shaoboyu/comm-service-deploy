@@ -1,7 +1,8 @@
 package com.deploy.dubbo.comsumer.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.deploy.dubbo.comsumer.domain.User;
+import com.demo.dubbo.User;
+import com.demo.dubbo.UserService;
 import org.springframework.stereotype.Component;
 
 /**

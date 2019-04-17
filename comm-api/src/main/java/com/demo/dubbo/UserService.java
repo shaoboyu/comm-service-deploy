@@ -1,7 +1,4 @@
-package com.deploy.dubbo.comsumer.service;
-
-
-import com.deploy.dubbo.comsumer.domain.User;
+package com.demo.dubbo;
 
 /**
  * Created by Jaycekon on 2017/9/19.

@@ -1,6 +1,5 @@
 package com.deploy.dubbo.comsumer.controller;
 
-import com.deploy.dubbo.comsumer.domain.User;
 import com.deploy.dubbo.comsumer.service.CityDubboConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
