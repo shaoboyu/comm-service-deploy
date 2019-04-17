@@ -11,11 +11,10 @@ server:
     buffer-size: 1024
     # 是否分配的直接内存
     direct-buffers: true
-
-  dubbo:
-    server: true
-    registry:
-      #使用zk作为注册中心
-      address: zookeeper://10.10.220.123:7998
-    application:
-      name: dubbo-provider
+#  dubbo:
+#    server: true
+#    registry:
+#      #使用zk作为注册中心
+#      address: zookeeper://10.10.220.123:7998
+#    application:
+#      name: dubbo-provider
