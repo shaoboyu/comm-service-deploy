@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestKafkaConsumer {
 
-    @KafkaListener(topics = "bill-group-log")
-    public void listen(ConsumerRecord<?, ?> record){
-        System.out.printf("topic = %s, offset = %d, value = %s \n", record.topic(), record.offset(), record.value());
-    }
+//    @KafkaListener(topics = "bill-group-log")
+//    public void listen(ConsumerRecord<?, ?> record){
+//        System.out.printf("topic = %s, offset = %d, value = %s \n", record.topic(), record.offset(), record.value());
+//    }
 }

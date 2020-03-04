@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/test/kafka/producer")
 public class TestKafkaProducerController {
+//
+//    @Autowired
+//    private KafkaTemplate<String,String> kafkaTemplate;
 
-    @Autowired
-    private KafkaTemplate<String,String> kafkaTemplate;
-
-    @RequestMapping("/send")
-    public String send(String msg){
-        ListenableFuture<SendResult<String, String>> test_topic = kafkaTemplate.send("bill-group-log", msg);
-        return "success";
-    }
+//    @RequestMapping("/send")
+//    public String send(String msg){
+//        ListenableFuture<SendResult<String, String>> test_topic = kafkaTemplate.send("bill-group-log", msg);
+//        return "success";
+//    }
 
 
 
