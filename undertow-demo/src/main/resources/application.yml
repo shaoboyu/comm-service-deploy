@@ -18,15 +18,15 @@ server:
 #      address: zookeeper://10.10.220.123:7998
 #    application:
 #      name: dubbo-provider
-spring:
-  kafka:
-    bootstrap-servers: 10.10.220.75:9092,10.10.220.76:9092,10.10.220.77:9092
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      group-id: test
-      enable-auto-commit: true
-      auto-commit-interval: 1000
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#spring:
+#  kafka:
+#    bootstrap-servers: 10.10.220.75:9092,10.10.220.76:9092,10.10.220.77:9092
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#    consumer:
+#      group-id: test
+#      enable-auto-commit: true
+#      auto-commit-interval: 1000
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
